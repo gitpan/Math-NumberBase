@@ -1,14 +1,16 @@
 --- #YAML:1.0
 name:               Math-NumberBase
-version:            0.01
+version:            0.02
 abstract:           Number converter from one base to another base
 author:
     - Yehezkiel Syamsuhadi <yehezkielbs@gmail.com>
-license:            unknown
+license:            perl
 distribution_type:  module
 configure_requires:
     ExtUtils::MakeMaker:  0
 requires:  {}
+build_requires:
+    Test::NoWarnings: 0.084
 no_index:
     directory:
         - t

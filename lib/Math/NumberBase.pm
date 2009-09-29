@@ -1,10 +1,10 @@
 package Math::NumberBase;
 
-use 5.010000;
+use 5.008;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 NAME
 
@@ -31,9 +31,9 @@ Math::NumberBase - Number converter from one base to another base
 
 =head1 DESCRIPTION
 
-This class can convert a number from one base to another base. 
+This class can convert a number from one base to another base.
 
-By default, this class will use a subset of (0..9,'a'..'z') as the symbols. 
+By default, this class will use a subset of (0..9,'a'..'z') as the symbols.
 That means for base-16 numbers, the default symbols are 0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'.
 But you can always specify your own symbols by passing a string to the constructor.
 
@@ -70,7 +70,7 @@ sub new {
     if (int $base != $base) {
         die '$base must be an integer';
     }
-    
+
     my @symbols_array = ();
 
     if (not defined $symbols) {
@@ -79,7 +79,7 @@ sub new {
             die 'Can not guess what should be the $symbols when $base > 36 and $symbols is not defined';
         }
         my @numalpha = (0 .. 9, 'a' .. 'z');
-        @symbols_array = splice @numalpha, 0, $base; 
+        @symbols_array = splice @numalpha, 0, $base;
     }
     else {
         @symbols_array = split //, $symbols;
@@ -118,10 +118,10 @@ sub get_base {
 =head2 get_symbols( )
 
 Returns an arrayref of symbols.
-  
+
   my $base_3 = Math::NumberBase->new(3, 'abc');
-  my $symbols = $base_3->get_symbols(); 
-  
+  my $symbols = $base_3->get_symbols();
+
   # $symbols = ['a', 'b', 'c'];
 
 =cut
@@ -135,7 +135,7 @@ sub get_symbols {
 Returns a hashref of symbol => value map.
 
   my $base_3 = Math::NumberBase->new(3, 'abc');
-  my $symbol_map = $base_3->get_symbol_value_map(); 
+  my $symbol_map = $base_3->get_symbol_value_map();
 
   # $symbol_map = {
   #     'a' => 0,
@@ -167,14 +167,14 @@ sub to_decimal {
 
     my $base = $self->get_base();
     my $symbol_value_map = $self->get_symbol_value_map();
-    
+
     my $result = 0;
 
     my $power = 0;
     while (length $string) {
         my $char = chop $string;
         $result += $symbol_value_map->{$char} * ($base ** $power);
-        $power++;    
+        $power++;
     }
 
     return $result;
